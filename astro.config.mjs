@@ -11,6 +11,6 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
 	// Enable the Solid.js renderer to support Solid.js JSX components.
 	renderers: ["@astrojs/renderer-solid"],
 	buildOptions: {
-		sitemap: true,
+		sitemap: false,
 	},
 });

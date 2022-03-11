@@ -1,4 +1,14 @@
 @import '../../node_modules/terminal.css/dist/terminal.min.css';
+h1 {
+	font-size: x-large !important;
+}
+h2 {
+	font-size: larger !important;
+	padding-top: 1em;
+}
+h3 {
+	font-size: large !important;
+}
 
 // Tokens
 :root {
