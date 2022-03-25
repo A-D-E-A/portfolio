@@ -9,7 +9,7 @@ h2 {
 h3 {
 	font-size: large !important;
 }
-code:not([class^="token"]) {
+p > code {
 	color: black !important;
 	background-color: lightgrey;
 }
