@@ -1,0 +1,50 @@
+@startuml structure
+
+skinparam defaultTextAlignment center
+
+!include <tupadr3/common>
+!include <tupadr3/font-awesome/server>
+!include <tupadr3/font-awesome/database>
+!include <tupadr3/devicons/mysql>
+!include <tupadr3/devicons/redis>
+!include <tupadr3/devicons/wordpress>
+!include <tupadr3/devicons/nodejs>
+!include <tupadr3/devicons/php>
+!include <tupadr3/devicons/docker>
+!include <tupadr3/devicons/terminal>
+
+title Schéma de l'infrastructure d'un Liveboard.
+
+actor client [
+    Utilisateur
+]
+
+DEV_DOCKER(docker,docker-compose,storage) #aliceblue;line:blue;line.dashed {
+    DEV_WORDPRESS(website,Website,node,black) #lightskyblue
+
+    DEV_MYSQL(db,MySQL,database,black) #orange
+
+    DEV_REDIS(cache,Redis,database,black) #orangered
+
+    frame apis #line.dotted {
+        DEV_NODEJS(api1,Api1,node,black) #lightgreen
+
+        DEV_NODEJS(api2,Api2,node,black) #lightgreen
+
+        DEV_PHP(api3,PHP-API,node,black) #mediumpurple {
+            rectangle cgi #white
+            DEV_TERMINAL(bash,bash,rectangle,black) #white
+            cgi -right- bash
+        }
+    }
+}
+
+website -right- db: Données du site wordpress
+api1 -- website: API GraphQL
+api2 -- website: APIs REST
+api3 -- website: Bases de données SQL Server
+cache -- api1
+cache -- api2
+website -- client: Affichage à l'écran
+
+@enduml
