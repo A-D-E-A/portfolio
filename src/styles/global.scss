@@ -10,11 +10,14 @@ h3 {
 	font-size: large !important;
 }
 code {
-	color: black;
+	color: black !important;
 	background-color: lightgrey;
 }
 p {
 	text-align: justify;
+}
+a code {
+	color: var(--t-active) !important;
 }
 
 // Tokens
