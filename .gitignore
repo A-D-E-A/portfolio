@@ -1,5 +1,5 @@
-# build output
-dist
+# build output (commented because of netlify weirdness)
+# dist
 
 # dependencies
 node_modules/
