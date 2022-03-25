@@ -13,4 +13,17 @@ export default /** @type {import('astro').AstroUserConfig} */ ({
 	buildOptions: {
 		sitemap: false,
 	},
+	markdownOptions: {
+		render: [
+			"@astrojs/markdown-remark",
+			{
+				syntaxHighlight: "shiki",
+				shikiConfig: {
+					theme: "material-ocean",
+					langs: ["js", "ts", "php"],
+					wrap: false,
+				},
+			},
+		],
+	},
 });

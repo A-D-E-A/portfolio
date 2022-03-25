@@ -2,7 +2,7 @@
 layout: ../../layouts/project.astro
 title: Liveboard
 by: Aberia
-clients: ["Aberia", "Mutac", "Mutuelle du Rempart", "Yelloh", "Capa"]
+clients: ["Aberia", "Mutac", "Mutuelle du Rempart", "Yelloh"]
 publishDate: 2021-03-02 08:00:00
 img: https://images.unsplash.com/photo-1547234935-80c7145ec969?fit=crop&w=1400&h=700&q=75
 description: |
@@ -73,28 +73,46 @@ Mais un autre problème intervient : comment savoir quelle donnée afficher à t
 
 Enfin, pour diminuer la taille de ces réponses sans perdre l'avantage de simplification, j'ai encapsulé ces éléments dans des [**Web Components**](https://webcomponents.org). C'est une norme proposée par Google qui permet de définir des éléments personnalisés de manière standardisée, on peut ainsi créer une abstraction du style et de la structure de l'élément qui seront définis dans un fichier à part, et ne renvoyer dans la réponse que l'essentiel des données. De plus, les éléments nous laissent ajouter des scripts et méthodes internes, ce qui peut rassembler la logique visuelle (changement de couleur, animation) directement au composant concerné.
 
-<figure>
-  <img src="https://adam-ambrosino.tk/assets/liveboard-preview.png" alt="Capture d'écran d'un liveboard">
-  <figcaption>Capture d'écran d'un liveboard en fonctionnement</figcaption>
-</figure>
+La suite, c'est les retouches graphiques, le positionnement, les couleurs. Sur cette partie, le client fait partie intégrante de l'équipe, notamment car les préférences et les besoins en terme d'accessibilité sont différents, et nous devons communiquer régulièrement afin d'apporter au fur et à mesure les modifications demandées. Nous nous adaptons à la méthode du client : Redmine, Google Sheet, ou bien un email pour entrer un ticket dans notre ERP.
 
-# Acteurs
+# Acteurs principaux
+
+- Alexandre Allies : Chef de projet
+- Adam Ambrosino : Développeur / designer
+- Quentin Fankhauser : Administrateur bases de données
+- Le product owner (représentant le besoin client) spécifique à chaque client.
 
 # Résultats
 
+Pour moi, ces projets ont été l'occasion d'apprendre à améliorer l'architecture de mes solutions.
+
+Pour Aberia, c'est un atout qui permet de se démarquer de la concurrence en offrant des solutions sur-mesure.
+
+Pour les clients, c'est la possibilité de mieux gérer une équipe et de mieux comprendre l'activité de leur centre d'appel.
+
+<figure>
+  <img src="https://adam-ambrosino.tk/assets/liveboard-preview.png" alt="Capture d'écran d'un liveboard">
+  <figcaption>Capture d'écran d'un liveboard en fonctionnement (données censurées).</figcaption>
+</figure>
+
 # Avenir
+
+Le **Liveboard** est encore produit et maintenu chez plusieurs clients. De nouveaux projets ont étés commandés et il ne semble pas y avoir de ralentissement sur les mois qui viennent.
+
+Lorsque le temps le permettra, le projet devra être refait entièrement, en espérant que ça soit la dernière réécriture. Cette ultime itération permettra de fournir un Liveboard commun et configurable. Le but est de fournir un produit qui pourra être utilisé, déployé, et amélioré sans que ma présence soit obligatoire. Que quelques fichiers de configurations soient suffisants pour la plupart des cas, que le développement ne soit nécessaire que pour des exceptions (mélange de 3 sources de données dans un tableau). Enfin, la chaîne de build devra être posée afin d'automatiser les tâches complexes et de simplifier le déploiement du site.
 
 # Critique
 
-Plusieurs clients ont demandé à Aberia d'avoir une visibilité en temps réelle sur leurs données. Des status d'agents du call-center au statistiques de ventes, ce large pannel de données permet une gestion et un management plus efficace. Le problème, c'est que ce nombre de données est très grand et vient souvent de sources différentes qu'il faut croiser. Pour un même client nous sommes allés jusqu'à connecter : deux bases de données [SQL Server](https://www.microsoft.com/en-us/sql-server), une base de données [MySQL](https://www.mysql.com), deux APIs REST et une API [GraphQL](https://graphql.org), avec plusieurs appels à chacune de ces sources pour plusieurs des requêtes/statistiques à afficher ! Avec plusieurs ordinateurs connectés à cet écran et le besoin d'utiliser un minimum de ressources, il est compliqué de récupérer toutes ces informations rapidement depuis le navigateur.
+Ayant développés tous ces liveboards seul dans leur intégralité (certaines sources de données ont été gérées par l'administrateur, mais je reste le seul développeur), j'ai vu tout ce qui aurait pu être amélioré.
 
-C'est pourquoi je ne l'ai pas fait : j'ai développé un serveur qui utilise plusieurs microservices conteneurisés avec [Docker](https://www.docker.com) ; développés en [Node.js](https://nodejs.org), [PHP](https://www.php.net) ou [Bash](https://www.gnu.org/software/bash/) pour faire toutes ces requêtes ; stocké les réponses temporairement dans un cache [Redis](https://redis.io) ; puis envoyé la réponse au client sous forme de Server-Sent Event ! Le client peut se connecter avec un **Event Listener** pour récupérer automatiquement les mises à jour depuis le serveur sans augmenter drastiquement la charge réseau à chaque utilisateur.
+Je ressors grandi de ces projets car j'ai toujours essayé d'améliorer la structure et de simplifier le processus de modification du projet. J'ai beaucoup appris une des raisons qui me pousse à réécrire le projet dans son intégralité. C'était effectivement important pour un premier jet d'aller au plus vite et au plus simple, mais maintenant qu'il a été repris plusieurs fois, il faut vraiment imposer un temps de restructuration afin de ne plus accumuler la dette technique.
 
-<figure>
-  <img src="https://adam-ambrosino.tk/assets/liveboard-structure.svg" alt="Diagramme de l'infrastructure">
-  <figcaption>Diagramme Plantuml de l'instrastructure conteneurisée</figcaption>
-</figure>
+# Compétences
 
-Mais un autre problème intervient : comment savoir quelle donnée afficher à tel endroit ? Il est simple de "bricoler" une solution, mais difficile de poser une structure efficace qui soit aussi robuste que flexible. Pour cela, j'ai choisi de directement renvoyer des morceaux de structure HTML dans la réponse de notre serveur au lieu de simplement renvoyer les données, la taille de la réponse est plus importante mais il est plus simple d'insérer les composants et de les identifier, simplifiant donc la maintenabilité de l'application.
+- [(Vanilla) Javascript](https://adam-ambrosino.tk/skill/javascript)
+- [PHP](https://adam-ambrosino.tk/skill/php)
+- [Docker](https://adam-ambrosino.tk/skill/docker)
+- [Gitlab CI](https://adam-ambrosino.tk/skill/gitlab-ci)
+- [Gestion de réunions](https://adam-ambrosino.tk/skill/meetings)
+- [Gestion de tickets](https://adam-ambrosino.tk/skill/tickets)
 
-Enfin, pour diminuer la taille de ces réponses sans perdre l'avantage de simplification, j'ai encapsulé ces éléments dans des [**Web Components**](https://webcomponents.org). C'est une norme proposée par Google qui permet de définir des éléments personnalisés de manière standardisée, on peut ainsi créer une abstraction du style et de la structure de l'élément qui seront définis dans un fichier à part, et ne renvoyer dans la réponse que l'essentiel des données. De plus, les éléments nous laissent ajouter des scripts et méthodes internes, ce qui peut rassembler la logique visuelle (changement de couleur, animation) directement au composant concerné.
