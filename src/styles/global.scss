@@ -16,7 +16,7 @@ code {
 p {
 	text-align: justify;
 }
-a code {
+a code, a strong {
 	color: var(--t-active) !important;
 }
 
